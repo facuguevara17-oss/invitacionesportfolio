@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invitaciones Digitales — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --azur-50:#EEF1F7;--azur-100:#D9E0EC;--azur-200:#B5C2D7;--azur-300:#8FA1BB;
+  --azur-400:#5E7497;--azur-500:#2F4870;--azur-600:#1A2E4B;--azur-700:#122036;
+  --azur-800:#0B1525;--azur-900:#060B17;
+  --arcilla-50:#FBEEE7;--arcilla-100:#F6D8C8;--arcilla-200:#EFBBA1;
+  --arcilla-300:#E69B7C;--arcilla-400:#DD8669;--arcilla-500:#D67156;--arcilla-600:#B85C42;
+  --rose-50:#FBF1EE;--rose-100:#F6E2DC;--rose-200:#E9C5BE;--rose-300:#DBA89E;
+  --olive-50:#F1F3EC;--olive-100:#E1E6D9;--olive-200:#C4CDB4;--olive-500:#6A7D5C;--olive-600:#54664A;
+  --neutral-0:#FBF8F0;--neutral-50:#F5F0E6;--neutral-100:#ECE5D6;--neutral-200:#DCD3BF;
+  --neutral-300:#BFB69E;--neutral-400:#8F8772;--neutral-500:#6E6957;--neutral-600:#514D40;
+  --neutral-700:#3B3830;--neutral-900:#333333;
+  --brand-primary:#1A2E4B;--brand-primary-hover:#122036;--brand-primary-subtle:#EEF1F7;
+  --brand-accent:#D67156;--brand-accent-hover:#B85C42;
+  --bg-page:#F5F0E6;--bg-surface:#FBF8F0;--bg-subtle:#ECE5D6;
+  --border-default:#DCD3BF;--border-brand:#1A2E4B;
+  --text-primary:#333333;--text-secondary:#6E6957;--text-disabled:#BFB69E;--text-on-brand:#FBF8F0;
+  --state-error:#C0392B;--state-success:#6A7D5C;--state-focus-ring:#5E7497;
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg-page);color:var(--text-primary);font-size:14px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:0 0 80px}
+
+/* Header */
+.ds-header{padding:48px 40px 40px;border-bottom:1px solid var(--border-default);background:var(--bg-surface)}
+.ds-tag{display:inline-block;background:var(--azur-50);color:var(--azur-600);font-size:11px;font-weight:600;letter-spacing:.08em;padding:4px 12px;border-radius:999px;text-transform:uppercase;margin-bottom:16px}
+.ds-title{font-size:32px;font-weight:700;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:6px}
+.ds-sub{font-size:14px;color:var(--text-secondary)}
+.ds-meta{display:flex;gap:24px;margin-top:20px;flex-wrap:wrap}
+.ds-meta span{font-size:12px;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+.ds-meta span::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--border-default);display:inline-block}
+
+/* Sections */
+.section{padding:40px 40px 0}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--neutral-400);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--neutral-100)}
+.divider{border:none;border-top:1px solid var(--neutral-100);margin:40px 0 0}
+
+/* Color scales */
+.scale-block{margin-bottom:28px}
+.scale-name{font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:8px}
+.scale-role{font-size:11px;color:var(--text-secondary);margin-bottom:10px}
+.swatches{display:flex;gap:4px;border-radius:8px;overflow:hidden}
+.sw{flex:1;height:44px;position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px}
+.sw span{font-size:9px;color:rgba(255,255,255,.7);font-weight:600;mix-blend-mode:difference}
+.sw.anchor{outline:2px solid var(--text-primary);outline-offset:2px;border-radius:3px;z-index:1}
+
+/* Semantic tokens */
+.token-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.token-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg-surface);border-radius:6px;border:1px solid var(--border-default)}
+.token-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:1px solid rgba(0,0,0,.08)}
+.token-name{font-size:11px;font-family:monospace;color:var(--text-secondary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.token-hex{font-size:11px;color:var(--neutral-400);font-family:monospace;white-space:nowrap}
+
+/* Type scale */
+.type-table{width:100%;border-collapse:collapse}
+.type-table tr{border-bottom:1px solid var(--neutral-100)}
+.type-table td{padding:12px 0;vertical-align:middle}
+.type-role{font-size:11px;color:var(--text-secondary);margin-top:2px}
+.type-meta{font-size:11px;font-family:monospace;color:var(--neutral-400)}
+
+/* Spacing */
+.sp-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.sp-label{font-size:11px;font-family:monospace;color:var(--brand-primary);min-width:100px}
+.sp-bar{background:var(--azur-50);border-radius:3px;height:20px}
+.sp-val{font-size:11px;color:var(--text-secondary);min-width:36px;text-align:right}
+
+/* Radii & shadows */
+.radius-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.radius-demo{display:flex;flex-direction:column;align-items:center;gap:8px}
+.radius-box{width:60px;height:44px;background:var(--azur-50);border:1.5px solid var(--azur-200)}
+.radius-lbl{font-size:11px;color:var(--text-secondary);font-family:monospace}
+.shadow-row{display:flex;gap:32px;flex-wrap:wrap}
+.shadow-card{width:110px;height:72px;background:var(--bg-surface);border-radius:8px}
+.shadow-hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.shadow-focus{box-shadow:0 0 0 3px rgba(94,116,151,.35);border:1px solid var(--border-default)}
+.shadow-lbl{font-size:11px;color:var(--text-secondary);margin-top:8px;text-align:center;max-width:110px}
+.shadow-code{font-size:10px;font-family:monospace;color:var(--neutral-400);display:block;margin-top:2px}
+
+/* Components */
+.comp-block{margin-bottom:36px}
+.comp-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:16px}
+.comp-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-bottom:8px}
+.state-lbl{font-size:10px;color:var(--neutral-400);text-align:center;margin-top:5px}
+.btn-wrap{display:flex;flex-direction:column;align-items:center}
+
+/* Buttons */
+.btn{border-radius:4px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;cursor:default;border:none;display:inline-flex;align-items:center;justify-content:center}
+.btn-md{height:48px;padding:0 24px;font-size:16px}
+.btn-sm{height:40px;padding:0 16px;font-size:14px}
+.btn-primary{background:var(--brand-accent);color:var(--text-on-brand)}
+.btn-primary-hover{background:var(--brand-accent-hover);color:var(--text-on-brand)}
+.btn-secondary{background:var(--bg-surface);color:var(--text-primary);border:1.5px solid var(--border-brand)!important}
+.btn-ghost{background:transparent;color:var(--text-primary)}
+.btn-dark{background:var(--brand-primary);color:var(--text-on-brand)}
+.btn-disabled{background:var(--neutral-100);color:var(--text-disabled);opacity:.5;cursor:not-allowed}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500}
+.badge-brand{background:var(--azur-50);color:var(--azur-600)}
+.badge-success{background:var(--olive-100);color:var(--olive-600)}
+.badge-error{background:#FBEAEA;color:#9B2C2C}
+.badge-accent{background:var(--arcilla-50);color:var(--arcilla-600)}
+.badge-neutral{background:var(--neutral-100);color:var(--neutral-600)}
+.badge-rose{background:var(--rose-100);color:var(--rose-300)}
+
+/* Inputs */
+.input-demo{height:48px;border-radius:4px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:0 16px;display:block;width:100%;max-width:280px;outline:none}
+.input-default{border:1px solid var(--border-default);background:var(--bg-surface);color:var(--text-disabled)}
+.input-focused{border:1.5px solid var(--brand-primary);background:var(--bg-surface);color:var(--text-primary);box-shadow:0 0 0 3px rgba(94,116,151,.3)}
+.input-error{border:1px solid var(--state-error);background:var(--bg-surface);color:var(--text-primary)}
+.input-label{font-size:14px;font-weight:500;color:var(--text-primary);margin-bottom:6px}
+.helper{font-size:11.5px;margin-top:5px;max-width:280px}
+.helper-ok{color:var(--text-secondary)}
+.helper-err{color:var(--state-error)}
+
+/* Checkbox & Toggle */
+.cb-wrap{display:flex;align-items:center;gap:8px}
+.cb{width:20px;height:20px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cb-off{background:var(--bg-surface);border:1.5px solid var(--border-default)}
+.cb-on{background:var(--brand-primary);border:1.5px solid var(--brand-primary)}
+.cb-label{font-size:14px;color:var(--text-primary)}
+.toggle{width:44px;height:24px;border-radius:999px;position:relative;flex-shrink:0}
+.toggle-off{background:var(--neutral-100);border:1.5px solid var(--border-default)}
+.toggle-on{background:var(--brand-primary)}
+.thumb{width:20px;height:20px;border-radius:50%;background:var(--bg-surface);position:absolute;top:1px;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.thumb-off{left:1px}.thumb-on{left:21px}
+
+/* Cards */
+.card-demo{width:180px;border-radius:4px;border:1px solid var(--border-default);overflow:hidden;background:var(--bg-surface)}
+.card-preview{height:120px;background:var(--neutral-100);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--neutral-400)}
+.card-info{padding:10px 12px}
+.card-cat{font-size:11px;color:var(--text-secondary);display:block}
+.card-name{font-size:13px;font-weight:600;color:var(--text-primary);display:block}
+.card-selected{border:2px solid var(--brand-primary)}
+.card-preview-sel{background:rgba(238,241,247,.6);position:relative}
+.check-badge{width:24px;height:24px;border-radius:50%;background:var(--brand-primary);display:flex;align-items:center;justify-content:center;position:absolute;top:8px;right:8px}
+
+/* Palette showcase */
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px;margin-bottom:8px}
+.pal-card{border-radius:8px;overflow:hidden;border:1px solid var(--border-default)}
+.pal-swatch{height:56px}
+.pal-info{padding:8px 10px;background:var(--bg-surface)}
+.pal-name{font-size:11px;font-weight:600;color:var(--text-primary);display:block}
+.pal-hex{font-size:10px;color:var(--text-secondary);font-family:monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="ds-header">
+  <div class="ds-tag">Design System</div>
+  <h1 class="ds-title">Invitaciones Digitales</h1>
+  <p class="ds-sub">Sistema de diseño completo · Paleta mediterránea · Light mode · WCAG 2.1 AA</p>
+  <div class="ds-meta">
+    <span>Plus Jakarta Sans</span>
+    <span>Azur Profundo + Arcilla Viva</span>
+    <span>Base 4 spacing</span>
+    <span>6 componentes</span>
+  </div>
+</div>
+
+<!-- COLOR SCALES -->
+<div class="section">
+  <p class="section-label">01 — Paleta principal</p>
+  <div class="palette-grid">
+    <div class="pal-card"><div class="pal-swatch" style="background:#1A2E4B"></div><div class="pal-info"><span class="pal-name">Azur Profundo</span><span class="pal-hex">#1A2E4B · primary</span></div></div>
+    <div class="pal-card"><div class="pal-swatch" style="background:#D67156"></div><div class="pal-info"><span class="pal-name">Arcilla Viva</span><span class="pal-hex">#D67156 · accent / CTA</span></div></div>
+    <div class="pal-card"><div class="pal-swatch" style="background:#E9C5BE"></div><div class="pal-info"><span class="pal-name">Rosa Calma</span><span class="pal-hex">#E9C5BE · social</span></div></div>
+    <div class="pal-card"><div class="pal-swatch" style="background:#6A7D5C"></div><div class="pal-info"><span class="pal-name">Olivo Suave</span><span class="pal-hex">#6A7D5C · orgánico</span></div></div>
+    <div class="pal-card"><div class="pal-swatch" style="background:#F5F0E6;border-bottom:1px solid #DCD3BF"></div><div class="pal-info"><span class="pal-name">Crema</span><span class="pal-hex">#F5F0E6 · página</span></div></div>
+    <div class="pal-card"><div class="pal-swatch" style="background:#333333"></div><div class="pal-info"><span class="pal-name">Antracita</span><span class="pal-hex">#333333 · texto</span></div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SCALES -->
+<div class="section">
+  <p class="section-label">02 — Escalas cromáticas</p>
+
+  <div class="scale-block">
+    <div class="scale-name">Azur Profundo — primario / estructura</div>
+    <div class="scale-role">Botones dark, nav, selección activa, foco, links</div>
+    <div class="swatches">
+      <div class="sw" style="background:#EEF1F7"><span>50</span></div>
+      <div class="sw" style="background:#D9E0EC"><span>100</span></div>
+      <div class="sw" style="background:#B5C2D7"><span>200</span></div>
+      <div class="sw" style="background:#8FA1BB"><span>300</span></div>
+      <div class="sw" style="background:#5E7497"><span>400</span></div>
+      <div class="sw" style="background:#2F4870"><span>500</span></div>
+      <div class="sw anchor" style="background:#1A2E4B"><span>600</span></div>
+      <div class="sw" style="background:#122036"><span>700</span></div>
+      <div class="sw" style="background:#0B1525"><span>800</span></div>
+      <div class="sw" style="background:#060B17"><span>900</span></div>
+    </div>
+  </div>
+
+  <div class="scale-block">
+    <div class="scale-name">Arcilla Viva — acento / CTA</div>
+    <div class="scale-role">Botón primario de acción, badges "Nuevo", highlights cálidos</div>
+    <div class="swatches">
+      <div class="sw" style="background:#FBEEE7"><span>50</span></div>
+      <div class="sw" style="background:#F6D8C8"><span>100</span></div>
+      <div class="sw" style="background:#EFBBA1"><span>200</span></div>
+      <div class="sw" style="background:#E69B7C"><span>300</span></div>
+      <div class="sw" style="background:#DD8669"><span>400</span></div>
+      <div class="sw anchor" style="background:#D67156"><span>500</span></div>
+      <div class="sw" style="background:#B85C42"><span>600</span></div>
+    </div>
+  </div>
+
+  <div class="scale-block">
+    <div class="scale-name">Neutrales cálidos — superficies y texto</div>
+    <div class="swatches">
+      <div class="sw" style="background:#FBF8F0;border:1px solid #DCD3BF"><span style="color:#BFB69E">0</span></div>
+      <div class="sw anchor" style="background:#F5F0E6"><span style="color:#BFB69E">50</span></div>
+      <div class="sw" style="background:#ECE5D6"><span style="color:#BFB69E">100</span></div>
+      <div class="sw" style="background:#DCD3BF"><span>200</span></div>
+      <div class="sw" style="background:#BFB69E"><span>300</span></div>
+      <div class="sw" style="background:#8F8772"><span>400</span></div>
+      <div class="sw" style="background:#6E6957"><span>500</span></div>
+      <div class="sw" style="background:#514D40"><span>600</span></div>
+      <div class="sw" style="background:#3B3830"><span>700</span></div>
+      <div class="sw" style="background:#333333"><span>900</span></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px">
+    <div class="scale-block">
+      <div class="scale-name">Rosa Calma — social (bodas, cumpleaños)</div>
+      <div class="swatches">
+        <div class="sw" style="background:#FBF1EE"><span style="color:#DBA89E">50</span></div>
+        <div class="sw" style="background:#F6E2DC"><span style="color:#DBA89E">100</span></div>
+        <div class="sw anchor" style="background:#E9C5BE"><span style="color:#9B5749">200</span></div>
+        <div class="sw" style="background:#DBA89E"><span>300</span></div>
+        <div class="sw" style="background:#CC8B7E"><span>400</span></div>
+      </div>
+    </div>
+    <div class="scale-block">
+      <div class="scale-name">Olivo Suave — orgánico (botánica)</div>
+      <div class="swatches">
+        <div class="sw" style="background:#F1F3EC"><span style="color:#A4B190">50</span></div>
+        <div class="sw" style="background:#E1E6D9"><span style="color:#A4B190">100</span></div>
+        <div class="sw" style="background:#C4CDB4"><span>200</span></div>
+        <div class="sw" style="background:#A4B190"><span>300</span></div>
+        <div class="sw anchor" style="background:#6A7D5C"><span>500</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SEMANTIC TOKENS -->
+<div class="section">
+  <p class="section-label">03 — Tokens semánticos</p>
+  <div class="token-grid">
+    <div class="token-row"><div class="token-dot" style="background:#1A2E4B"></div><span class="token-name">--brand-primary</span><span class="token-hex">#1A2E4B</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#122036"></div><span class="token-name">--brand-primary-hover</span><span class="token-hex">#122036</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#EEF1F7;border-color:#D9E0EC"></div><span class="token-name">--brand-primary-subtle</span><span class="token-hex">#EEF1F7</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#D67156"></div><span class="token-name">--brand-accent</span><span class="token-hex">#D67156</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#B85C42"></div><span class="token-name">--brand-accent-hover</span><span class="token-hex">#B85C42</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#F5F0E6;border-color:#DCD3BF"></div><span class="token-name">--bg-page</span><span class="token-hex">#F5F0E6</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#FBF8F0;border-color:#DCD3BF"></div><span class="token-name">--bg-surface</span><span class="token-hex">#FBF8F0</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#ECE5D6"></div><span class="token-name">--bg-subtle</span><span class="token-hex">#ECE5D6</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#DCD3BF"></div><span class="token-name">--border-default</span><span class="token-hex">#DCD3BF</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#333333"></div><span class="token-name">--text-primary</span><span class="token-hex">#333333</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#6E6957"></div><span class="token-name">--text-secondary</span><span class="token-hex">#6E6957</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#6A7D5C"></div><span class="token-name">--state-success</span><span class="token-hex">#6A7D5C</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#C0392B"></div><span class="token-name">--state-error</span><span class="token-hex">#C0392B</span></div>
+    <div class="token-row"><div class="token-dot" style="background:#5E7497"></div><span class="token-name">--state-focus-ring</span><span class="token-hex">azur-400 · 35%</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <p class="section-label">04 — Tipografía · Plus Jakarta Sans</p>
+  <table class="type-table">
+    <tr><td style="width:55%"><span style="font-size:36px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;color:#333">Display 36</span></td><td><span class="type-meta">36px · 700 · lh 1.2 · −0.02em</span><p class="type-role">Hero, splash</p></td></tr>
+    <tr><td><span style="font-size:30px;font-weight:700;letter-spacing:-0.015em;line-height:1.2;color:#333">Heading 1</span></td><td><span class="type-meta">30px · 700 · lh 1.2</span><p class="type-role">Título de página</p></td></tr>
+    <tr><td><span style="font-size:24px;font-weight:600;letter-spacing:-0.01em;color:#333">Heading 2</span></td><td><span class="type-meta">24px · 600 · lh 1.35</span><p class="type-role">Título de sección</p></td></tr>
+    <tr><td><span style="font-size:20px;font-weight:600;color:#333">Heading 3</span></td><td><span class="type-meta">20px · 600 · lh 1.35</span><p class="type-role">Subsección, modal</p></td></tr>
+    <tr><td><span style="font-size:18px;font-weight:600;color:#333">Title de card o lista</span></td><td><span class="type-meta">18px · 600 · lh 1.35</span><p class="type-role">Título de card</p></td></tr>
+    <tr><td><span style="font-size:16px;font-weight:400;color:#333">Body large — texto principal de la app</span></td><td><span class="type-meta">16px · 400 · lh 1.5</span><p class="type-role">Cuerpo lead</p></td></tr>
+    <tr><td><span style="font-size:14px;font-weight:400;color:#333">Body — cuerpo por defecto del sistema</span></td><td><span class="type-meta">14px · 400 · lh 1.5</span><p class="type-role">Cuerpo base</p></td></tr>
+    <tr><td><span style="font-size:14px;font-weight:500;color:#333">Label — etiqueta de formulario</span></td><td><span class="type-meta">14px · 500 · lh 1.5</span><p class="type-role">Labels, botón sm</p></td></tr>
+    <tr><td><span style="font-size:12px;font-weight:500;color:#6E6957">Caption — meta info y helper text</span></td><td><span class="type-meta">12px · 500 · lh 1.5</span><p class="type-role">Meta, helper</p></td></tr>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- SPACING -->
+<div class="section">
+  <p class="section-label">05 — Espaciado · base 4</p>
+  <div class="sp-row"><span class="sp-label">--spacing-4</span><div class="sp-bar" style="width:4px"></div><span class="sp-val">4 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-8</span><div class="sp-bar" style="width:8px"></div><span class="sp-val">8 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-12</span><div class="sp-bar" style="width:12px"></div><span class="sp-val">12 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-16</span><div class="sp-bar" style="width:16px"></div><span class="sp-val">16 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-24</span><div class="sp-bar" style="width:24px"></div><span class="sp-val">24 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-32</span><div class="sp-bar" style="width:32px"></div><span class="sp-val">32 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-48</span><div class="sp-bar" style="width:48px"></div><span class="sp-val">48 px</span></div>
+  <div class="sp-row"><span class="sp-label">--spacing-64</span><div class="sp-bar" style="width:64px"></div><span class="sp-val">64 px</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- RADII & SHADOWS -->
+<div class="section">
+  <p class="section-label">06 — Radios y sombras</p>
+  <div class="radius-row">
+    <div class="radius-demo"><div class="radius-box" style="border-radius:4px"></div><span class="radius-lbl">sm · 4px</span></div>
+    <div class="radius-demo"><div class="radius-box" style="border-radius:8px"></div><span class="radius-lbl">md · 8px</span></div>
+    <div class="radius-demo"><div class="radius-box" style="border-radius:12px"></div><span class="radius-lbl">lg · 12px</span></div>
+    <div class="radius-demo"><div class="radius-box" style="border-radius:999px;width:80px;height:32px"></div><span class="radius-lbl">full · 999px</span></div>
+  </div>
+  <div class="shadow-row">
+    <div><div class="shadow-card shadow-hover"></div><p class="shadow-lbl">Card hover<span class="shadow-code">0 4px 12px rgba(0,0,0,.08)</span></p></div>
+    <div><div class="shadow-card shadow-focus"></div><p class="shadow-lbl">Focus ring<span class="shadow-code">azur-400 @ 35% alpha</span></p></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- COMPONENTS -->
+<div class="section">
+  <p class="section-label">07 — Componentes</p>
+
+  <div class="comp-block">
+    <p class="comp-title">Button</p>
+    <div class="comp-row">
+      <div class="btn-wrap"><button class="btn btn-md btn-primary">Crear evento</button><span class="state-lbl">accent · default</span></div>
+      <div class="btn-wrap"><button class="btn btn-md btn-primary-hover">Crear evento</button><span class="state-lbl">accent · hover</span></div>
+      <div class="btn-wrap"><button class="btn btn-md btn-dark">Ver mis eventos</button><span class="state-lbl">primary · dark</span></div>
+      <div class="btn-wrap"><button class="btn btn-md btn-secondary">Ver plantillas</button><span class="state-lbl">secondary</span></div>
+      <div class="btn-wrap"><button class="btn btn-md btn-ghost">Cancelar</button><span class="state-lbl">ghost</span></div>
+      <div class="btn-wrap"><button class="btn btn-md btn-disabled" disabled>Crear evento</button><span class="state-lbl">disabled</span></div>
+    </div>
+    <div class="comp-row">
+      <div class="btn-wrap"><button class="btn btn-sm btn-primary">Guardar</button><span class="state-lbl">accent · sm</span></div>
+      <div class="btn-wrap"><button class="btn btn-sm btn-dark">Confirmar</button><span class="state-lbl">primary · sm</span></div>
+    </div>
+  </div>
+
+  <div class="comp-block">
+    <p class="comp-title">Badge</p>
+    <div class="comp-row">
+      <span class="badge badge-brand">Boda</span>
+      <span class="badge badge-rose">Cumpleaños</span>
+      <span class="badge badge-success">Confirmado</span>
+      <span class="badge badge-error">Cancelado</span>
+      <span class="badge badge-accent">Nuevo</span>
+      <span class="badge badge-neutral">Borrador</span>
+    </div>
+  </div>
+
+  <div class="comp-block">
+    <p class="comp-title">Input</p>
+    <div style="display:flex;flex-wrap:wrap;gap:20px">
+      <div>
+        <p class="input-label">Nombre del evento</p>
+        <input class="input-demo input-default" placeholder="Ej. Boda de Laura y Marcos">
+        <p class="helper helper-ok">Escríbelo tal como aparecerá en la invitación.</p>
+      </div>
+      <div>
+        <p class="input-label">Nombre del evento</p>
+        <input class="input-demo input-focused" value="Boda de Laura y Marcos">
+      </div>
+      <div>
+        <p class="input-label">Fecha</p>
+        <input class="input-demo input-error" value="32/13/2025">
+        <p class="helper helper-err">La fecha introducida no es válida.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-block">
+    <p class="comp-title">Checkbox y toggle</p>
+    <div class="comp-row" style="gap:24px">
+      <div class="cb-wrap"><div class="cb cb-off"></div><span class="cb-label">Sin marcar</span></div>
+      <div class="cb-wrap">
+        <div class="cb cb-on"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#FBF8F0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="cb-label">Marcado</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-left:16px">
+        <div class="toggle toggle-off"><div class="thumb thumb-off"></div></div><span class="cb-label">Off</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="toggle toggle-on"><div class="thumb thumb-on"></div></div><span class="cb-label">On</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-block">
+    <p class="comp-title">Card / Template</p>
+    <div class="comp-row" style="align-items:flex-start;gap:16px">
+      <div>
+        <div class="card-demo"><div class="card-preview">Preview</div><div class="card-info"><span class="card-cat">Boda</span><span class="card-name">Clásica</span></div></div>
+        <p class="state-lbl">default</p>
+      </div>
+      <div>
+        <div class="card-demo" style="box-shadow:0 4px 12px rgba(0,0,0,.08)"><div class="card-preview">Preview</div><div class="card-info"><span class="card-cat">Boda</span><span class="card-name">Clásica</span></div></div>
+        <p class="state-lbl">hover</p>
+      </div>
+      <div>
+        <div class="card-demo card-selected">
+          <div class="card-preview card-preview-sel">Preview
+            <div class="check-badge"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="#FBF8F0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="card-info"><span class="card-cat">Boda</span><span class="card-name">Clásica</span></div>
+        </div>
+        <p class="state-lbl">selected</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
